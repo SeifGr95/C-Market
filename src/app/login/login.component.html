@@ -1,0 +1,97 @@
+<ng-template #customLoadingTemplate>
+  <div class="custom-class">
+    <h3></h3>
+  </div>
+</ng-template>
+
+<ngx-loading
+  [show]="loading"
+  [config]="{ backdropBorderRadius: '3px' }"
+  [template]="customLoadingTemplate"
+></ngx-loading>
+
+<section class="section-conten padding-y" style="min-height: 84vh;">
+  <!-- ============================ COMPONENT LOGIN   ================================= -->
+  <div class="card mx-auto" style="max-width: 380px; margin-top: 100px;">
+    <div class="card-body">
+      <h4 class="card-title mb-4">Authentification</h4>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input
+            name=""
+            class="form-control"
+            placeholder="Email"
+            type="text"
+            formControlName="email"
+          />
+          <div
+            *ngIf="submitted && loginForm.controls.email.errors"
+            class="invalid-feedback d-block"
+          >
+            <div *ngIf="loginForm.controls.email.errors.required">
+              Email is required
+            </div>
+            <div *ngIf="loginForm.controls.email.errors.email">
+              Email n'est pas valide
+            </div>
+          </div>
+        </div>
+        <!-- form-group// -->
+        <div class="form-group">
+          <input
+            name=""
+            class="form-control"
+            placeholder="Mot de passe"
+            type="password"
+            formControlName="password"
+          />
+          <div
+            *ngIf="submitted && loginForm.controls.password.errors"
+            class="invalid-feedback d-block"
+          >
+            <div *ngIf="loginForm.controls.password.errors.required">
+              Mot des passe est obligé
+            </div>
+            <div *ngIf="loginForm.controls.password.errors.minlength">
+              Mot de passe doit contenir au moin 6 cracteres
+            </div>
+          </div>
+        </div>
+        <!-- form-group// -->
+
+        <div class="form-group">
+          <a routerLink="/reset" class="float-right">Mot de passe Oublié?</a>
+        </div>
+        <!-- form-group form-check .// -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">
+            Authentification
+          </button>
+        </div>
+        <!-- form-group// -->
+      </form>
+    </div>
+    <!-- card-body.// -->
+  </div>
+  <!-- card .// -->
+
+  <p class="text-center mt-4">
+    Vous n'avez pas un compte ? <a routerLink="/register">Inscrivez vous</a>
+  </p>
+  <br /><br />
+  <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
+</section>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.3)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <div
+    class="spinner-border text-primary d-flex justify-content-center"
+    style="width: 20rem; height: 20rem;"
+    role="status"
+  >
+    <span class="sr-only">Loading...</span>
+  </div>
+</ngx-spinner>

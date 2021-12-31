@@ -1,0 +1,119 @@
+<article class="card order-group">
+  <header class="card-header"></header>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <h6 class="text-muted">Nom</h6>
+
+        <p>
+          {{ user.fullname }}
+        </p>
+        <h6 class="text-muted">Email</h6>
+        <p>
+          {{ user.email }}
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h6 class="text-muted">Adresse</h6>
+        <p>{{ user.address }}</p>
+
+        <h6 class="text-muted">Téléphone</h6>
+        <p>{{ user.phone }}</p>
+      </div>
+      <div class="col-md-4">
+        <!-- <h6 class="text-muted">Adresse de Livraison</h6>
+        <p></p>
+        <h6 class="text-muted">Etats</h6>-->
+      </div>
+    </div>
+
+    <!-- row.// -->
+    <hr />
+    <div class="row">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date Commande</th>
+            <th scope="col">Montant Total</th>
+            <th scope="col">Etats</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ order.orderDate | date }}</td>
+            <td>{{ order.total }}</td>
+
+            <span *ngIf="order.isOrderCompleted == 2">En Cours</span>
+            <span *ngIf="order.isOrderCompleted == 1">Valider</span>
+            <span *ngIf="order.isOrderCompleted == 0">Refuser</span>
+            <td>
+              <button
+                class="btn btn-primary btn-block float-right mx-1"
+                (click)="openLg(longContent,order)"
+              >
+                Details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- card-body .// -->
+</article>
+<ng-template #longContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"></h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Produit</th>
+          <th scope="col">Image</th>
+          <th scope="col">Qte</th>
+          <th scope="col">Prix Unitaire</th>
+          <th scope="col">Prix Total</th>
+          <th scope="col">Commentaire</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prod of displayedOrder.items; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ prod.item.productName }}</td>
+          <td>
+            <img
+              src="{{ BASE_URL }}{{ prod.item.productImage }}"
+              class="img-sm border"
+            />
+          </td>
+          <td>{{ prod.quantity }}</td>
+          <td>{{ prod.price | number:'1.3'}}</td>
+          <td>{{ prod.price * prod.quantity | number:'1.3'}}</td>
+          <td>{{ prod.comment }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Fermer
+    </button>
+  </div>
+</ng-template>

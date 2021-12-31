@@ -1,0 +1,113 @@
+<div class="d-flex" id="wrapper">
+  <!-- Sidebar -->
+  <div class="border-right" id="sidebar-wrapper">
+    <!-- END SIDEBAR USERPIC -->
+    <!-- SIDEBAR USER TITLE -->
+    <div class="profile-usertitle">
+      <div class="profile-userpic mt-3">
+        <span class="icon icon-md rounded-circle bg-primary">
+          <i class="fa fa-user white"></i>
+        </span>
+      </div>
+      <div class="profile-usertitle-name">
+        {{ fullname }}
+      </div>
+      <div class="profile-usertitle-job">
+        Admin
+      </div>
+    </div>
+    <div class="list-group list-group-flush">
+      <a routerLink="/admin" class="list-group-item list-group-item-action"
+        ><strong>Commandes</strong>
+      </a>
+      <a
+        routerLink="/admin/produits"
+        class="list-group-item list-group-item-action"
+        ><strong>Produits</strong></a
+      >
+      <a
+        routerLink="/admin/categorie"
+        class="list-group-item list-group-item-action"
+        ><strong>Categories</strong></a
+      >
+      <a
+        routerLink="/admin/clients"
+        class="list-group-item list-group-item-action"
+        ><strong>Clients</strong></a
+      >
+      <a
+        routerLink="/admin/offres"
+        class="list-group-item list-group-item-action"
+        ><strong>Offres</strong></a
+      >
+      <a
+        routerLink="/admin/messages"
+        class="list-group-item list-group-item-action"
+        ><strong>Messages</strong></a
+      >
+      <a
+        routerLink="/admin/users"
+        class="list-group-item list-group-item-action"
+        ><strong>Utilisateurs</strong></a
+      >
+      <button (click)="logout()" class="list-group-item list-group-item-action">
+        <strong>Deconnexion</strong>
+      </button>
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <nav class="navbar navbar-main navbar-expand-lg navbar-light">
+      <div class="container">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#main_nav"
+          aria-controls="main_nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse w-100 order-3 dual-collapse2 align-items-center " id="main_nav">
+          <ul class="navbar-nav align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/admin">Commandes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/admin/produits">Produits</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/admin/categorie">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/admin/clients">Clients</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/admin/offres">Offres</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/admin/messages">Messages</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/admin/users">Utilisateurs</a>
+            </li>
+            <li class="nav-item">
+              <button class="btn nav-link" (click)="logout()">
+                Deconnexion
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
+</div>

@@ -1,0 +1,63 @@
+<main>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Client</th>
+        <th scope="col">Num de Contact</th>
+        <th scope="col">Adress</th>
+        <th scope="col">Email</th>
+        <th scope="col">Nombre des Commandes</th>
+
+        <th scope="col"><span class="float-right"> Action</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <th scope="row" *ngIf="user.user.isAdmin == false">{{ i }}</th>
+        <td *ngIf="user.user.isAdmin == false">{{ user.user.fullname }}</td>
+        <td *ngIf="user.user.isAdmin == false">{{ user.user.phoneNumber }}</td>
+
+        <td *ngIf="user.user.isAdmin == false">{{ user.user.address }}</td>
+        <td *ngIf="user.user.isAdmin == false">{{ user.user.email }}</td>
+        <td *ngIf="user.user.isAdmin == false">{{ user.totalCount }}</td>
+        <td *ngIf="user.user.isAdmin == false">
+          <button
+            class="btn btn-danger float-right"
+            style="margin-left: 5px;"
+            (click)="deleteuser(user.user._id)"
+          >
+            Supprimer
+          </button>
+          <button
+            class="btn btn-primary float-right mx-1"
+            routerLink="/admin/clientprofile/{{user.user._id}}"
+          >
+            Consulter
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+
+<div id="modal-example" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Nom de la categorie </label>
+          <input type="text" class="form-control" placeholder="" />
+        </div>
+      </div>
+    </div>
+    <p class="uk-text-right">
+      <button class="btn btn-danger uk-modal-close" style="margin: 5px;">
+        Annuler
+      </button>
+      <button class="btn btn-success" style="margin-left: 5px;">
+        Confirmer
+      </button>
+    </p>
+  </div>
+</div>

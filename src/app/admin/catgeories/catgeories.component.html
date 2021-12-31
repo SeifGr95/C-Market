@@ -1,0 +1,237 @@
+<main>
+  <div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-3 pull-right">
+      <button
+        class="btn btn-primary btn-block"
+        type="button"
+        uk-toggle="target: #modal-example"
+      >
+        Ajouter
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col-lg">Nom de la categorie</th>
+          <th scope="col">Sous categories</th>
+          <th colspan="5">
+            <span class="pull-right" style="margin-right: 10px;">Action</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cat of categories; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td class="h6">{{ cat.categoryName }}</td>
+          <td>
+            <div class="col">
+              <ul class="nav flex-column">
+                <li *ngFor="let sub of cat.subCategories" class="nav-item my-2">
+                  <span class="h6 mx-md-3 my-2">{{ sub.subName }}</span>
+                  <span
+                    ><button class="btn btn-sm btn-danger mx-md-1">
+                      <i
+                        class="far fa-trash-alt"
+                        (click)="deleteSubCateg(cat._id, sub._id)"
+                      ></i>
+                    </button>
+                    <button
+                      class="btn btn-sm btn-primary mx-md-1"
+                      (click)="updateSubCateg(updatecontent,cat._id, sub)"
+                    >
+                      <i class="far fa-edit"></i>
+                    </button>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </td>
+
+          <td class="pull-right">
+            <button
+              class="btn btn-primary mx-md-1"
+              style="margin: 5px;"
+              (click)="openLg(content, cat._id)"
+            >
+              Ajouter sous categorie
+            </button>
+            <button
+              class="btn btn-primary mx-md-1"
+              style="margin: 5px;"
+              uk-toggle="target: #update"
+              (click)="edit(cat._id)"
+            >
+              Modifier
+            </button>
+            <button class="btn btn-danger mx-md-1" (click)="supprimer(cat._id)">
+              Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<div id="modal-example" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Nom de la categorie </label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder=""
+            [(ngModel)]="name"
+          />
+        </div>
+      </div>
+    </div>
+    <p class="uk-text-right">
+      <button
+        class="btn btn-danger uk-modal-close"
+        style="margin: 5px;"
+        (click)="clear()"
+      >
+        Annuler
+      </button>
+      <button
+        class="btn btn-success uk-modal-close"
+        style="margin-left: 5px;"
+        (click)="addCategorie()"
+      >
+        Confirmer
+      </button>
+    </p>
+  </div>
+</div>
+<div id="update" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Nom de la categorie </label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder=""
+            [(ngModel)]="name"
+          />
+        </div>
+      </div>
+    </div>
+    <p class="uk-text-right">
+      <button
+        class="btn btn-danger uk-modal-close"
+        style="margin: 5px;"
+        (click)="clear()"
+      >
+        Annuler
+      </button>
+      <button
+        class="btn btn-success uk-modal-close"
+        style="margin-left: 5px;"
+        (click)="modfier()"
+      >
+        Confirmer
+      </button>
+    </p>
+  </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Ajouter une sous categorie</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <div class="form-group">
+        <label for="address">Sous categorie</label>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          aria-describedby="emailHelp"
+          [(ngModel)]="subName"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Annuler
+    </button>
+    <button
+      class="btn btn-primary"
+      type="button"
+      style="margin-left: 5px;"
+      (click)="confirmAddSub()"
+    >
+      Confirmer
+    </button>
+  </div>
+</ng-template>
+<ng-template #updatecontent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modifier une sous categorie</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <div class="form-group">
+        <label for="address">Sous categorie</label>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          aria-describedby="emailHelp"
+          [(ngModel)]="selectedSubName"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Annuler
+    </button>
+    <button
+      class="btn btn-primary"
+      type="button"
+      style="margin-left: 5px;"
+      (click)="confirmUpdateSub()"
+    >
+      Confirmer
+    </button>
+  </div>
+</ng-template>

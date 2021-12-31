@@ -1,0 +1,68 @@
+<div class="form-row">
+  <!-- form-group end.// -->
+  <div class="col-md-5">
+    <label style="color: transparent !important;">Categorie</label>
+    <ng-select
+      [items]="users"
+      bindLabel="user.fullname"
+      placeholder="Selectionner un client"
+      [(ngModel)]="selectedClient"
+    >
+    </ng-select>
+  </div>
+
+  <!-- form-group end.// -->
+
+  <div class="col-sm-2 form-group">
+    <label style="color: transparent !important;">Categorie</label>
+    <button class="form-control btn btn-primary" (click)="getOrdersByClient()">
+      Filtrer
+    </button>
+  </div>
+  <div class="col-sm-2 form-group">
+    <label style="color: transparent !important;">Categorie</label>
+    <button class="form-control btn btn-danger" (click)="getAllorders()">
+      Annuler
+    </button>
+  </div>
+</div>
+<div class="row">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Client</th>
+        <th scope="col">téléphone</th>
+        <th scope="col">Date</th>
+        <th scope="col">Montant</th>
+        <th scope="col">Etats</th>
+        <th scope="col"><span class="float-right">Action</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders; let i = index">
+        <th scope="row">
+          <a routerLink="/details/{{ order._id }}/{{ i + 1 }}">{{ i + 1 }}</a>
+        </th>
+        <td>{{ order.owner.fullname }}</td>
+        <td>{{ order.owner.phoneNumber }}</td>
+        <td>{{ order.orderDate | date }}</td>
+        <td>{{ order.total + deliverPrice | number:'1.3'}} DT</td>
+        <td>
+          <span *ngIf="order.isOrderCompleted == 2">En Cours</span>
+          <span *ngIf="order.isOrderCompleted == 1">Valider</span>
+          <span *ngIf="order.isOrderCompleted == 0">Refuser</span>
+        </td>
+        <td>
+          <button
+            class="btn btn-primary float-right"
+            style="margin-left: 5px;"
+            routerLink="admindetails/{{ order._id }}/{{ i + 1 }}"
+          >
+            <i class="fa fa-check-circle"></i> Consulter
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

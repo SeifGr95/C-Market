@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+thead th {
+    background-color: #3167eb;
+    color: white;
+}
+*{
+    font-family: 'Roboto', sans-serif;
+  }

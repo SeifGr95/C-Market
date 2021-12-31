@@ -1,0 +1,179 @@
+<main>
+  <div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-3 pull-right">
+      <button
+        class="btn btn-primary btn-block"
+        type="button"
+        uk-toggle="target: #modal-example"
+      >
+        Ajouter
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col-lg">Titre</th>
+          <th scope="col-lg">Description</th>
+          <th scope="col-lg">Image</th>
+          <th colspan="5">
+            <span class="pull-right" style="margin-right: 10px;">Action</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cat of offres; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ cat.PoromotionTitle }}</td>
+          <td>{{ cat.Description }}</td>
+          <td>
+            <img
+              src="{{ BASE_URL }}{{ cat.promotionImage }}"
+              style="height: 100px; width: 100px;"
+            />
+          </td>
+          <td class="pull-right">
+            <button
+              class="btn btn-success"
+              style="margin: 5px;"
+              uk-toggle="target: #update"
+              (click)="modifier(cat)"
+            >
+              Modifier
+            </button>
+            <button
+              class="btn btn-danger"
+              style="margin-left: 5px;"
+              (click)="deleteOffer(cat._id)"
+            >
+              Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<div id="modal-example" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Titre </label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder=""
+            [(ngModel)]="title"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Description </label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder=""
+            [(ngModel)]="desc"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Image </label>
+          <input
+            type="file"
+            class="form-control"
+            placeholder=""
+            (change)="fileChange($event)"
+          />
+        </div>
+      </div>
+    </div>
+    <p class="uk-text-right">
+      <button
+        class="btn btn-danger uk-modal-close"
+        style="margin: 5px;"
+        (click)="clear()"
+      >
+        Annuler
+      </button>
+      <button
+        class="btn btn-success uk-modal-close"
+        style="margin-left: 5px;"
+        (click)="addOffer()"
+      >
+        Confirmer
+      </button>
+    </p>
+  </div>
+</div>
+
+<div id="update" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Titre </label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder=""
+            [(ngModel)]="title"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Description </label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder=""
+            [(ngModel)]="desc"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Image </label>
+          <input
+            type="file"
+            class="form-control"
+            placeholder=""
+            (change)="fileChange($event)"
+          />
+        </div>
+      </div>
+    </div>
+    <p class="uk-text-right">
+      <button
+        class="btn btn-danger uk-modal-close"
+        style="margin: 5px;"
+        (click)="clear()"
+      >
+        Annuler
+      </button>
+      <button
+        class="btn btn-success uk-modal-close"
+        style="margin-left: 5px;"
+        (click)="updateOffer()"
+      >
+        Confirmer
+      </button>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,379 @@
+<section class="section-main bg padding-y">
+  <div class="container">
+    <div class="row">
+    
+      <aside class="col-md-3">
+        <nav class="card">
+          <ul class="menu-category">
+            <li *ngFor="let cat of categories">
+              <a routerLink="prods/{{ cat._id }}">{{ cat.categoryName }}</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <!-- col.// -->
+      <div class="col-md-9">
+        <article class="banner-wrap">
+          <div
+            id="carousel1_indicator"
+            class="carousel slide"
+            data-ride="carousel"
+          >
+            <ol class="carousel-indicators">
+              <li
+                data-target="#carousel1_indicator"
+                data-slide-to="0"
+                class="active"
+              ></li>
+              <li data-target="#carousel1_indicator" data-slide-to="1"></li>
+              <li data-target="#carousel1_indicator" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="card-banner bg-dark">
+                  <img
+                    src="{{ BASE_URL }}{{ firstOffer.promotionImage }}"
+                    class="card-img opacity w-100 img-fluid"
+                    style="height: 300px;"
+                  />
+                  <div class="card-img-overlay text-white">
+                    <h5 class="card-title white">
+                      {{ firstOffer.PoromotionTitle }}
+                    </h5>
+                    <p class="card-text" style="max-width: 400px;">
+                      {{ firstOffer.Description }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item" *ngFor="let offer of NewOffers">
+                <div class="card-banner bg-dark">
+                  <img
+                    src="{{ BASE_URL }}{{ offer.promotionImage }}"
+                    class="card-img opacity w-100 img-fluid"
+                    style="height: 300px;"
+                  />
+                  <div class="card-img-overlay text-white">
+                    <div class="card-img-overlay text-white">
+                      <h5 class="card-title white">
+                        {{ offer.PoromotionTitle }}
+                      </h5>
+                      <p class="card-text" style="max-width: 400px;">
+                        {{ offer.Description }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a
+              class="carousel-control-prev"
+              href="#carousel1_indicator"
+              role="button"
+              data-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a
+              class="carousel-control-next"
+              href="#carousel1_indicator"
+              role="button"
+              data-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </article>
+      </div>
+      <!-- col.// -->
+    </div>
+    <!-- row.// -->
+  </div>
+  <!-- container //  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+<section class="section-specials padding-y border-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <figure class="itemside">
+          <div class="aside">
+            <span class="icon-sm rounded-circle bg-primary">
+              <i class="fa fa-money white" aria-hidden="true"></i>
+            </span>
+          </div>
+          <figcaption class="info">
+            <h6 class="title">Meilleurs Prix</h6>
+            <p class="text-muted"></p>
+          </figcaption>
+        </figure>
+        <!-- iconbox // -->
+      </div>
+      <!-- col // -->
+      <div class="col-md-4">
+        <figure class="itemside">
+          <div class="aside">
+            <span class="icon-sm rounded-circle bg-danger">
+              <i class="fa fa-phone white" aria-hidden="true"></i>
+            </span>
+          </div>
+          <figcaption class="info">
+            <h6 class="title">Disponiblité 24/7</h6>
+            <p class="text-muted"></p>
+          </figcaption>
+        </figure>
+        <!-- iconbox // -->
+      </div>
+      <!-- col // -->
+      <div class="col-md-4">
+        <figure class="itemside">
+          <div class="aside">
+            <span class="icon-sm rounded-circle bg-success">
+              <i class="fa fa-truck white"></i>
+            </span>
+          </div>
+          <figcaption class="info">
+            <h6 class="title">livraisin à domicile</h6>
+            <p class="text-muted"></p>
+          </figcaption>
+        </figure>
+        <!-- iconbox // -->
+      </div>
+      <!-- col // -->
+    </div>
+    <!-- row.// -->
+  </div>
+  <!-- container.// -->
+</section>
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+  <div class="container">
+    <header class="section-heading">
+      <h3 class="section-title">Nouveau Produits</h3>
+    </header>
+    <!-- sect-heading -->
+
+    <div class="row">
+      <div class="col-md-3" *ngFor="let prod of newProducts">
+        <div href="#" class="card card-product-grid">
+          <a href="#" class="img-wrap">
+            <img src="{{ BASE_URL }}{{ prod.productImage }}" />
+          </a>
+          <figcaption class="info-wrap">
+            <a href="#" class="title">{{ prod.productName }}</a>
+            <div class="price-wrap mt-2" *ngIf="AuthServ.isAuthenticated()">
+              <span class="price" *ngIf="prod.InPromotion == false"
+                >{{ prod.price  | number:'1.3'}} DT</span
+              >
+              <span class="price" *ngIf="prod.InPromotion == true"
+                >{{ prod.Promotionprice  | number:'1.3'}} DT</span
+              >
+            </div>
+            <div
+            class="price-wrap mt-2"
+            *ngIf="!AuthServ.isAuthenticated()"
+          >
+            <span class="text-danger"> Vous devez etre connecter pour voir les prix</span>
+          </div>
+            <button
+            *ngIf="AuthServ.isAuthenticated()"
+              class="btn btn-block btn-primary"
+              (click)="openLg(content, 1, prod)"
+            >
+              <i class="fa fa-shopping-cart"></i>
+              <span style="padding: 5%;"> Ajouter au panier </span>
+            </button>
+          </figcaption>
+        </div>
+      </div>
+      <!-- col.// -->
+    </div>
+    <!-- row.// -->
+  </div>
+  <!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+<section class="section-name padding-y-sm">
+  <div class="container">
+    <header class="section-heading">
+      <h3 class="section-title">Promotions</h3>
+    </header>
+    <!-- sect-heading -->
+
+    <div class="row">
+      <div class="col-md-3" *ngFor="let prom of promotions">
+        <div href="#" class="card card-product-grid">
+          <a href="#" class="img-wrap">
+            <img src="{{ BASE_URL }}{{ prom.productImage }}" />
+          </a>
+          <figcaption class="info-wrap">
+            <a href="#" class="title">{{ prom.productName | number:'1.3'}}</a>
+            <div class="price-wrap mt-2"  *ngIf="AuthServ.isAuthenticated()">
+              <span class="price">{{ prom.Promotionprice | number:'1.3'}} DT</span>
+              <del class="price-old">{{ prom.price  | number:'1.3'}} DT</del>
+            </div>
+            <div
+            class="price-wrap mt-2"
+            *ngIf="!AuthServ.isAuthenticated()"
+          >
+            <span class="text-danger"> Vous devez etre connecter pour voir les prix</span>
+          </div>
+            <button *ngIf="AuthServ.isAuthenticated()"
+              class="btn btn-block btn-primary"
+              (click)="openLg(content, 0, prom)"
+            >
+              <i class="fa fa-shopping-cart light"></i>
+              <span class="light"> Ajouter au panier </span>
+            </button>
+            <!-- price-wrap.// -->
+          </figcaption>
+        </div>
+      </div>
+      <!-- col.// -->
+
+      <!-- col.// -->
+    </div>
+    <!-- row.// -->
+  </div>
+  <!-- container // -->
+</section>
+<div id="modal-example" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <h2 class="uk-modal-title">{{ selectedProd.title }}</h2>
+    <div class="form-row">
+      <div>
+        <div class="form-group">
+          <label>Qte </label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder=""
+            [(ngModel)]="selectedProd.qty"
+            (change)="calculate($event)"
+          />
+        </div>
+      </div>
+    </div>
+    <aside>
+      <div class="card">
+        <div class="card-body">
+          <dl class="dlist-align">
+            <dt>Prix unitaire:</dt>
+            <dd class="text-right">{{ selectedProd.price  | number:'1.3'}} DT</dd>
+          </dl>
+
+          <dl class="dlist-align">
+            <dt>Total:</dt>
+            <dd class="text-right h5">
+              <strong>{{ selectedProd.totalPrice  | number:'1.3'}} DT</strong>
+            </dd>
+          </dl>
+          <hr />
+        </div>
+        <!-- card-body.// -->
+      </div>
+    </aside>
+    <p class="uk-text-right" style="margin-top: 4px;">
+      <button
+        class="btn btn-danger uk-modal-close"
+        type="button"
+        style="margin-left: 5px;"
+      >
+        Annuler
+      </button>
+      <button
+        class="btn btn-success uk-modal-close"
+        type="button"
+        style="margin-left: 5px;"
+        (click)="Confirmer()"
+      >
+        Confirmer
+      </button>
+    </p>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ selectedProd.title }}</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-row">
+      <div>
+        <div class="form-group">
+          <label>Qte </label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder=""
+            [(ngModel)]="selectedProd.qty"
+            (change)="calculate($event)"
+          />
+        </div>
+        <div class="form-group">
+          <label>Commentaire </label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder=""
+            [(ngModel)]="selectedProd.comment"
+          />
+        </div>
+      </div>
+    </div>
+    <aside>
+      <div class="card">
+        <div class="card-body">
+          <dl class="dlist-align">
+            <dt>Prix unitaire:</dt>
+            <dd class="text-right">{{ selectedProd.price | number:'1.3'}} DT</dd>
+          </dl>
+
+          <dl class="dlist-align">
+            <dt>Total:</dt>
+            <dd class="text-right h5">
+              <strong>{{ selectedProd.totalPrice | number:'1.3' }} DT</strong>
+            </dd>
+          </dl>
+          <hr />
+        </div>
+        <!-- card-body.// -->
+      </div>
+    </aside>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Annuler
+    </button>
+    <button
+      class="btn btn-primary uk-modal-close"
+      type="button"
+      style="margin-left: 5px;"
+      (click)="Confirmer()"
+    >
+      Confirmer
+    </button>
+  </div>
+</ng-template>

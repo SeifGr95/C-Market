@@ -1,0 +1,87 @@
+<article class="card order-group">
+  <header class="card-header">
+    <span>Date: {{ orderDetails.orderDate | date }}</span>
+  </header>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <h6 class="text-muted">Details</h6>
+
+        <p>
+          Total:{{ orderDetails.total }} DT <br />
+          Frais de livraison: {{ deliverPrice | number:'1.3'}} DT <br />
+          <span class="b"
+            >A payer: {{ orderDetails.total + deliverPrice| number:'1.3'}} DT
+          </span>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h6 class="text-muted">Client</h6>
+        <p>{{ orderDetails.owner.fullname }}</p>
+        <h6 class="text-muted">Téléphone</h6>
+        <p>{{ orderDetails.owner.phoneNumber }}</p>
+      </div>
+      <div class="col-md-4">
+        <h6 class="text-muted">Adresse de Livraison</h6>
+        <p>{{ orderDetails.address }}</p>
+        <h6 class="text-muted">Etats</h6>
+        <p *ngIf="orderDetails.isOrderCompleted == 0">Refuser</p>
+        <p *ngIf="orderDetails.isOrderCompleted == 1">Valider</p>
+        <p *ngIf="orderDetails.isOrderCompleted == 2">En Cours</p>
+      </div>
+    </div>
+    <div class="d-flex flex-row">
+      <div class="pull-left mx-md-1">
+        <button class="btn btn-primary btn-block" (click)="generatePdf()">
+          imprimer
+        </button>
+      </div>
+    </div>
+    <div class="d-flex flex-row-reverse" *ngIf="authServ.isAdmin() == true">
+      <div class="pull-right mx-md-1">
+        <button class="btn btn-success" (click)="acceptOrder()">
+          Accepter
+        </button>
+      </div>
+      <div class="pull-right mx-md-1">
+        <button class="btn btn-danger" (click)="refuseOrder()">
+          Refuser
+        </button>
+      </div>
+    </div>
+    <!-- row.// -->
+    <hr />
+    <div class="row">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Produit</th>
+            <th scope="col">Image</th>
+            <th scope="col">Qte</th>
+            <th scope="col">Prix Unitaire</th>
+            <th scope="col">Prix Total</th>
+            <th scope="col">Commentaire</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prod of orderDetails.items; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ prod.item.productName }}</td>
+            <td>
+              <img
+                src="{{ BASE_URL }}{{ prod.item.productImage }}"
+                class="img-sm border"
+              />
+            </td>
+            <td>{{ prod.quantity }}</td>
+            <td>{{ prod.price | number:'1.3'}}</td>
+            <td>{{ prod.price * prod.quantity  | number:'1.3'}}</td>
+            <td>{{ prod.comment }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- card-body .// -->
+</article>

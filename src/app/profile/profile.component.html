@@ -1,0 +1,192 @@
+<section class="section-content padding-y">
+  <div class="container">
+    <div class="row">
+      <aside class="col-md-6">
+        <!-- ============================ COMPONENT PROFILE 2  ================================= -->
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title mb-4">Profil</h4>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Nom & Prenom</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  [(ngModel)]="currentName"
+                  disabled
+                />
+              </div>
+              <!-- form-group end.// -->
+              <div class="form-group col-md-6">
+                <label class="white">Repeat password</label>
+                <button
+                  class="btn btn-primary btn-block"
+                  href="#update"
+                  uk-toggle
+                  (click)="Update(0)"
+                >
+                  Modifier
+                </button>
+              </div>
+              <!-- form-group end.// -->
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Email</label>
+                <input
+                  class="form-control"
+                  type="email"
+                  [(ngModel)]="currentEmail"
+                  disabled
+                />
+              </div>
+              <!-- form-group end.// -->
+              <div class="form-group col-md-6">
+                <label class="white">Repeat password</label>
+                <button
+                  class="btn btn-primary btn-block"
+                  href="#update"
+                  uk-toggle
+                  (click)="Update(1)"
+                >
+                  Modifier
+                </button>
+              </div>
+              <!-- form-group end.// -->
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Adresse</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  [(ngModel)]="currentAdress"
+                  disabled
+                />
+              </div>
+              <!-- form-group end.// -->
+              <div class="form-group col-md-6">
+                <label class="white">Repeat password</label>
+                <button
+                  class="btn btn-primary btn-block"
+                  href="#update"
+                  uk-toggle
+                  (click)="Update(2)"
+                >
+                  Modifier
+                </button>
+              </div>
+              <!-- form-group end.// -->
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Telephone</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  [(ngModel)]="currentPhone"
+                  disabled
+                />
+              </div>
+              <!-- form-group end.// -->
+              <div class="form-group col-md-6">
+                <label class="white">Repeat password</label>
+                <button
+                  class="btn btn-primary btn-block"
+                  href="#update"
+                  uk-toggle
+                  (click)="Update(3)"
+                >
+                  Modifier
+                </button>
+              </div>
+              <!-- form-group end.// -->
+            </div>
+          </div>
+          <!-- card-body.// -->
+        </div>
+        <!-- card .// -->
+        <!-- ============================ COMPONENT PROFILE END.// ================================= -->
+      </aside>
+      <aside class="col-md-6">
+        <!-- ============================ COMPONENT PROFILE 2  ================================= -->
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title mb-4">Mes Commandes</h4>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Montant</th>
+                    <th scope="col">Date</th>
+
+                    <th scope="col">Etats</th>
+                    <th scope="col"><span class="float-right">Action</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let ord of orders; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ ord.total }} DT</td>
+                    <td>{{ ord.orderDate | date }}</td>
+
+                    <td>En Cours</td>
+                    <td>
+                      <a
+                        class="btn btn-success float-right"
+                        style="margin-left: 5px;"
+                        routerLink="/details/{{ ord._id }}/{{ i + 1 }}"
+                      >
+                        <i class="fa fa-check-circle"></i> Consulter
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- card-body.// -->
+        </div>
+        <!-- card .// -->
+        <!-- ============================ COMPONENT PROFILE END.// ================================= -->
+      </aside>
+
+      <!-- col.// -->
+    </div>
+  </div>
+  <!-- container .//  -->
+</section>
+<div id="update" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>{{ selectedTitle }}</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder=""
+            [(ngModel)]="name"
+          />
+        </div>
+      </div>
+    </div>
+    <p class="uk-text-right">
+      <button
+        class="btn btn-light uk-modal-close"
+        style="margin: 5px;"
+        (click)="clear()"
+      >
+        Annuler
+      </button>
+      <button
+        class="btn btn-primary uk-modal-close"
+        style="margin-left: 5px;"
+        (click)="updateUser()"
+      >
+        Confirmer
+      </button>
+    </p>
+  </div>
+</div>

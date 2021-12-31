@@ -1,0 +1,159 @@
+<div class="container" style="min-height: calc(100vh - 306px);">
+  <section class="section-content padding-y">
+    <div class="container">
+      <div class="row">
+        <main>
+          <div class="filter-content collapse show">
+            <div class="row">
+              <div
+                class="col-md-4"
+                *ngFor="let prod of products; let i = index"
+              >
+                <figure
+                  class="card card-product-grid"
+                  style="min-width: 280px;"
+                >
+                  <div class="card card-product-grid">
+                    <img src="{{ BASE_URL }}{{ prod.productImage }}" />
+                    <a
+                      class="btn-overlay"
+                      uk-toggle="target: #modal-media-image"
+                      (click)="setImage(prod.productImage)"
+                      ><i class="fa fa-search-plus"></i> Agrandir</a
+                    >
+                  </div>
+
+                  <!-- img-wrap.// -->
+                  <figcaption class="info-wrap">
+                    <div class="fix-height">
+                      <a href="#" class="title">{{ prod.productName }}</a>
+                      <p class="text-success" *ngIf="prod.quantity > 0">
+                        En Stock
+                      </p>
+                      <p class="text-danger" *ngIf="prod.quantity <= 0">
+                        Stock epuisée
+                      </p>
+                      <div
+                        class="price-wrap mt-2"
+                        *ngIf="AuthServ.isAuthenticated()"
+                      >
+                        <span class="price" *ngIf="prod.InPromotion == false"
+                          >{{ prod.price | number: "1.3" }} DT</span
+                        >
+                        <span class="price" *ngIf="prod.InPromotion == true"
+                          >{{ prod.Promotionprice | number: "1.3" }} DT</span
+                        >
+                      </div>
+                      <div
+                        class="price-wrap mt-2"
+                        *ngIf="!AuthServ.isAuthenticated()"
+                      >
+                        <span class="text-danger"> Vous devez etre connecter pour voir les prix</span>
+                      </div>
+                    </div>
+                    <button  *ngIf="AuthServ.isAuthenticated()"
+                      class="btn btn-block btn-primary"
+                      (click)="openLg(content, prod)"
+                    >
+                      <i class="fa fa-shopping-cart"></i>
+                      <span class="px-1"> Ajouter au panier </span>
+                    </button>
+                  </figcaption>
+                </figure>
+                <div id="modal-media-image" class="uk-flex-top" uk-modal>
+                  <div
+                    class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical"
+                  >
+                    <button
+                      class="uk-modal-close-outside"
+                      type="button"
+                      uk-close
+                    ></button>
+                    <img src="{{ BASE_URL }}{{ defaultImage }}" alt="" />
+                  </div>
+                </div>
+              </div>
+              <!-- col.// -->
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ selectedProd.title }}</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-row">
+      <div>
+        <div class="form-group">
+          <label>Qte </label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder=""
+            [(ngModel)]="selectedProd.qty"
+            (change)="calculate($event)"
+          />
+        </div>
+        <div class="form-group">
+          <label>Commentaire </label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder=""
+            [(ngModel)]="selectedProd.comment"
+          />
+        </div>
+      </div>
+    </div>
+    <aside>
+      <div class="card">
+        <div class="card-body">
+          <dl class="dlist-align">
+            <dt>Prix unitaire:</dt>
+            <dd class="text-right">
+              {{ selectedProd.price | number: "1.3" }} DT
+            </dd>
+          </dl>
+
+          <dl class="dlist-align">
+            <dt>Total:</dt>
+            <dd class="text-right h5">
+              <strong>{{ selectedProd.totalPrice | number: "1.3" }} DT</strong>
+            </dd>
+          </dl>
+          <hr />
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Annuler
+    </button>
+    <button
+      class="btn btn-primary"
+      type="button"
+      style="margin-left: 5px;"
+      (click)="Confirmer()"
+    >
+      Confirmer
+    </button>
+  </div>
+</ng-template>

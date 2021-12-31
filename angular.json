@@ -1,0 +1,148 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "151cc8fe-ea1a-4ef7-bac0-b672c9cb7a26"
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "CubaMarket": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/CubaMarket",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css",
+              "src/assets/css/bootstrap.css",
+              "src/assets/css/responsive.css",
+              "src/assets/css/ui.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+            ],
+            "scripts": [
+              "src/assets/js/jquery-2.0.0.min.js",
+              "src/assets/js/bootstrap.bundle.min.js",
+              "node_modules/hammerjs/hammer.js",
+              "src/assets/js/script.js",
+              "node_modules/jquery/dist/jquery.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "CubaMarket:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "CubaMarket:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "CubaMarket:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css",
+              "src/assets/css/bootstrap.css",
+              "src/assets/css/responsive.css",
+              "src/assets/css/ui.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+            ],
+            "scripts": [
+              "src/assets/js/jquery-2.0.0.min.js",
+              "src/assets/js/bootstrap.bundle.min.js",
+              "node_modules/hammerjs/hammer.js",
+              "src/assets/js/script.js",
+              "node_modules/jquery/dist/jquery.js"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "CubaMarket:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "CubaMarket:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "CubaMarket"
+}

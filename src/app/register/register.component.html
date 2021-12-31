@@ -1,0 +1,94 @@
+<section class="section-content padding-y">
+
+    <!-- ============================ COMPONENT REGISTER   ================================= -->
+        <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+          <article class="card-body">
+            <header class="mb-4"><h4 class="card-title">Inscription</h4></header>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                   
+                    <div class="form-group">
+                        <label>Nom & Prenom </label>
+                        <input type="text" class="form-control" placeholder="" formControlName="fullname">
+                        <div *ngIf="submitted && registerForm.controls.fullname.errors" class="invalid-feedback d-block">
+                            <div *ngIf="registerForm.controls.fullname.errors.required">
+                              Veuillez remplir le champ
+                            </div>
+                            
+                          </div>
+                    </div> 
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" placeholder="" formControlName="email">
+                        <div *ngIf="submitted && registerForm.controls.email.errors" class="invalid-feedback d-block">
+                            <div *ngIf="registerForm.controls.email.errors.required">
+                              Veuillez remplir le champ
+                            </div>
+                            <div *ngIf="registerForm.controls.email.errors.email">
+                              Veuillez saisir une adresse email valide
+                            </div>
+                          </div>
+                    </div> 
+                    <div class="form-group">
+                        <label>Addresse </label>
+                        <input type="text" class="form-control" placeholder="" formControlName="adresse">
+                        <div *ngIf="submitted && registerForm.controls.adresse.errors" class="invalid-feedback d-block">
+                            <div *ngIf="registerForm.controls.adresse.errors.required">
+                              Veuillez remplir le champ
+                            </div>
+                          
+                          </div>
+                    </div> 
+                    <div class="form-group">
+                        <label>Numéro de telephone </label>
+                        <input type="text" class="form-control" placeholder="" formControlName="phone">
+                        <div *ngIf="submitted && registerForm.controls.phone.errors" class="invalid-feedback d-block">
+                            <div *ngIf="registerForm.controls.phone.errors.required">
+                              Veuillez remplir le champ
+                            </div>
+                          
+                          </div>
+                    </div> 
+                   
+                  
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Mot de passe</label>
+                            <input class="form-control" type="password" formControlName="password">
+                            <div *ngIf="submitted && registerForm.controls.password.errors" class="invalid-feedback d-block">
+                                <div *ngIf="registerForm.controls.password.errors.required">Veuillez remplir le champ</div>
+                                <div *ngIf="registerForm.controls.password.errors.minlength">Password must be at least 6 characters</div>
+                            </div>
+                        </div> <!-- form-group end.// --> 
+                        <div class="form-group col-md-6">
+                            <label>Confirmer Mot de passe</label>
+                            <input class="form-control" type="password" formControlName="confirmPassword">
+                            <div *ngIf="submitted && registerForm.controls.confirmPassword.errors" class="invalid-feedback d-block">
+                                <div *ngIf="registerForm.controls.confirmPassword.errors.required">Veuillez remplir le champ</div>
+                                <div *ngIf="registerForm.controls.confirmPassword.errors.mustMatch">Mot de passe et confirmation doit etre egaux</div>
+                            </div>
+                        </div> <!-- form-group end.// -->  
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block" [disabled]="!registerForm.valid"> Inscrivez Vous  </button>
+                    </div> <!-- form-group// -->      
+                           
+                </form>
+            </article><!-- card-body.// -->
+        </div> <!-- card .// -->
+        <p class="text-center mt-4">Vous avez déja un compte? <a routerLink="/login">Se Connecter</a></p>
+        <br><br>
+    <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+    
+    
+    </section>
+    <ngx-spinner
+    bdColor="rgba(51,51,51,0.3)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple"
+  >
+  <div class="spinner-border  text-primary d-flex justify-content-center" style="width: 20rem; height: 20rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  </ngx-spinner>
+  

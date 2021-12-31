@@ -1,0 +1,196 @@
+<main>
+  <div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-3 pull-right">
+      <button
+        class="btn btn-primary btn-block"
+        type="button"
+        uk-toggle="target: #addModal"
+      >
+        Ajouter
+      </button>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Admin</th>
+        <th scope="col">Num de Contact</th>
+        <th scope="col">Adress</th>
+        <th scope="col">Email</th>
+        <th scope="col"><span class="float-right"> Action</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <th scope="row">{{ i+1 }}</th>
+        <td>{{ user.fullname }}</td>
+        <td>{{ user.phoneNumber }}</td>
+
+        <td>{{ user.address }}</td>
+        <td>{{ user.email }}</td>
+        <td class="pull-right">
+          <button class="btn btn-success" style="margin: 5px;"  uk-toggle="target: #updateModal" (click)="updateUser(user)">Modifier</button>
+          <button class="btn btn-danger" style="margin-left: 5px;" (click)="deleteUser(user._id)">
+            Supprimer
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+<div id="updateModal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Nom & Prenom </label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder=""
+              [(ngModel)]="SelectedUser.fullname"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Numero Téléphone </label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder=""
+              [(ngModel)]="SelectedUser.phoneNumber"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Adresse </label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder=""
+              [(ngModel)]="SelectedUser.address"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Email </label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder=""
+              [(ngModel)]="SelectedUser.email"
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+
+      <p class="uk-text-right">
+        <button class="btn btn-danger uk-modal-close" style="margin: 5px;">
+          Annuler
+        </button>
+        <button
+          class="btn btn-success uk-modal-close"
+          style="margin-left: 5px;"
+         (click)="confirmUpdate()"
+        >
+          Confirmer
+        </button>
+      </p>
+    </div>
+  </div>
+  <div id="addModal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Nom & Prenom </label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder=""
+              [(ngModel)]="fullname"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Numero Téléphone </label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder=""
+              [(ngModel)]="phoneNumber"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Adresse </label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder=""
+              [(ngModel)]="address"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Email </label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder=""
+              [(ngModel)]="email"
+              
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Mot de passe </label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder=""
+              [(ngModel)]="password"
+              
+            />
+          </div>
+        </div>
+      </div>
+      <p class="uk-text-right">
+        <button class="btn btn-danger uk-modal-close" style="margin: 5px;" (click)="clear()">
+          Annuler
+        </button>
+        <button
+          class="btn btn-success uk-modal-close"
+          style="margin-left: 5px;"
+         (click)="confirmAdd()"
+        >
+          Confirmer
+        </button>
+      </p>
+    </div>
+  </div>

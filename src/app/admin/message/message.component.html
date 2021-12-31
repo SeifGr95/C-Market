@@ -1,0 +1,56 @@
+<main>
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col-lg">Nom</th>
+          <th scope="col-lg">Email</th>
+          <th scope="col-lg">Date</th>
+          <th colspan="5">
+            <span class="pull-right" style="margin-right: 10px;">Action</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let msg of messages; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ msg.fullname }}</td>
+          <td>{{ msg.email }}</td>
+          <td>{{ msg.createdAt | date }}</td>
+          <td class="pull-right">
+            <button
+              class="btn btn-success"
+              style="margin: 5px;"
+              uk-toggle="target: #consulter"
+              (click)="check(msg.message)"
+            >
+              Consulter
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<div id="consulter" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <h5>{{displayText}}</h5>
+        </div>
+      </div>
+    </div>
+    <p class="uk-text-right">
+      <button
+        class="btn btn-danger uk-modal-close"
+        style="margin: 5px;"
+        (click)="clear()"
+      >
+        Annuler
+      </button>
+    </p>
+  </div>
+</div>
